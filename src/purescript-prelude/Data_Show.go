@@ -4,7 +4,7 @@ import "strconv"
 import . "purescript"
 import "Data_Show"
 
-const Loader = true
+type Loader = Any
 
 func init() {
 	exports := Data_Show.Foreign

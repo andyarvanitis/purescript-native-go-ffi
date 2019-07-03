@@ -3,7 +3,7 @@ package arrays
 import . "purescript"
 import "Data_Array"
 
-const Loader = true
+type Loader = Any
 
 func init() {
 	exports := Data_Array.Foreign

@@ -7,8 +7,8 @@ import "purescript-prelude"
 import "purescript-arrays"
 import "purescript-console"
 
-const Loader = true
+type Loader = bool
 
-const _ = prelude.Loader
-const _ = console.Loader
-const _ = arrays.Loader
+type _ = prelude.Loader
+type _ = console.Loader
+type _ = arrays.Loader

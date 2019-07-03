@@ -4,7 +4,7 @@ import "fmt"
 import . "purescript"
 import "Effect_Console"
 
-const Loader = true
+type Loader = Any
 
 func init() {
 	exports := Effect_Console.Foreign

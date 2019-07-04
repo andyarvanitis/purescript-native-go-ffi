@@ -1,10 +1,8 @@
-package prelude
+package purescript_prelude
 
 import "strconv"
 import . "purescript"
 import "Data_Show"
-
-type Loader = Any
 
 func init() {
 	exports := Data_Show.Foreign

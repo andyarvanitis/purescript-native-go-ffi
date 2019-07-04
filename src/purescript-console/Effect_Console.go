@@ -1,10 +1,8 @@
-package console
+package purescript_console
 
 import "fmt"
 import . "purescript"
 import "Effect_Console"
-
-type Loader = Any
 
 func init() {
 	exports := Effect_Console.Foreign

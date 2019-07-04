@@ -1,9 +1,7 @@
-package arrays
+package purescript_arrays
 
 import . "purescript"
 import "Data_Array"
-
-type Loader = Any
 
 func init() {
 	exports := Data_Array.Foreign

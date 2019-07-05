@@ -5,5 +5,5 @@ import "Data_Unit"
 func init() {
 	exports := Data_Unit.Foreign
 
-	exports["unit"] = "unit"
+	exports["unit"] = nil
 }

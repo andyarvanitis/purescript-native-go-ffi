@@ -29,8 +29,9 @@ func init() {
 		}
 	}
 
-	exports["length"] = func(xs Any) Any {
-		return len(xs.([]Any))
+	exports["length"] = func(xs_ Any) Any {
+		xs, _ := xs_.([]Any)
+		return len(xs)
 	}
 
 	exports["indexImpl"] = func(just Any) Any {

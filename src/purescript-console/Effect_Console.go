@@ -11,7 +11,7 @@ func init() {
 
 	exports["log"] = func(s Any) Any {
 		return func() Any {
-			fmt.Println(s.(string))
+			fmt.Println(s)
 			return nil
 		}
 	}

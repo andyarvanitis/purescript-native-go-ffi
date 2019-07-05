@@ -1,7 +1,9 @@
 package purescript_arrays
 
-import . "purescript"
-import "Data_Array"
+import (
+	"Data_Array"
+	. "purescript"
+)
 
 func init() {
 	exports := Data_Array.Foreign

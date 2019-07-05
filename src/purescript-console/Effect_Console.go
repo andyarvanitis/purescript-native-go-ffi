@@ -1,8 +1,10 @@
 package purescript_console
 
-import "fmt"
-import . "purescript"
-import "Effect_Console"
+import (
+	"Effect_Console"
+	"fmt"
+	. "purescript"
+)
 
 func init() {
 	exports := Effect_Console.Foreign

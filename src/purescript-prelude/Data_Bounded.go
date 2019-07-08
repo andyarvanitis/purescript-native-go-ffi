@@ -6,11 +6,14 @@ import (
 	"unicode/utf8"
 )
 
+const maxInt = int((^uint(0)) >> 1)
+const minInt = -maxInt - 1
+
 func init() {
 	exports := Data_Bounded.Foreign
 
-	exports["topInt"] = math.MaxInt32
-	exports["bottomInt"] = math.MinInt32
+	exports["topInt"] = maxInt
+	exports["bottomInt"] = minInt
 
 	exports["topChar"] = string(utf8.MaxRune)
 	exports["bottomChar"] = string('\u0000')

@@ -9,7 +9,7 @@ func init() {
 	exports := Partial_Unsafe.Foreign
 
 	exports["unsafePartial"] = func(f Any) Any {
-		return Run(f)
+		return Apply(f, nil)
 	}
 
 }

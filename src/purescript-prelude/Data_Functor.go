@@ -12,8 +12,8 @@ func init() {
 		return func(xs_ Any) Any {
 			xs, _ := xs_.(Array)
 			result := make(Array, 0, len(xs))
-			for i, elem := range xs {
-				result[i] = Apply(f, elem)
+			for _, elem := range xs {
+				result = append(result, Apply(f, elem))
 			}
 			return result
 		}

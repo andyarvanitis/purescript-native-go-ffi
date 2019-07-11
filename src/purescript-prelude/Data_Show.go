@@ -4,6 +4,7 @@ import (
 	"Data_Show"
 	"fmt"
 	. "purescript"
+	"strings"
 )
 
 func init() {
@@ -13,8 +14,14 @@ func init() {
 		return fmt.Sprint(n)
 	}
 
-	exports["showNumberImpl"] = func(n Any) Any {
-		return fmt.Sprint(n)
+	exports["showNumberImpl"] = func(n_ Any) Any {
+		n, _ := n_.(float64)
+		s := fmt.Sprintf("%v", n)
+		if strings.Contains(s, ".") {
+			return s
+		} else {
+			return s + ".0"
+		}
 	}
 
 	exports["showStringImpl"] = func(s Any) Any {

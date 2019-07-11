@@ -14,4 +14,12 @@ func init() {
 		}
 	}
 
+	exports["bindE"] = func(a Any) Any {
+		return func(f Any) Any {
+			return func() Any {
+				return Run(Apply(f, Run(a)))
+			}
+		}
+	}
+
 }

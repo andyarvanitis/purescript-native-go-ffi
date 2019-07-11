@@ -5,6 +5,7 @@ package ffi
 
 import (
 	_ "purescript-arrays"
+	_ "purescript-assert"
 	_ "purescript-console"
 	_ "purescript-effect"
 	_ "purescript-prelude"

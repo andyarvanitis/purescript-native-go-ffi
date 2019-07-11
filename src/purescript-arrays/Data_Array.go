@@ -21,7 +21,7 @@ func init() {
 				length = end - start + 1
 				step = 1
 			}
-			ns := make([]Any, length)
+			ns := make([]Any, 0, length)
 			for i := start; i != end; i += step {
 				ns = append(ns, i)
 			}

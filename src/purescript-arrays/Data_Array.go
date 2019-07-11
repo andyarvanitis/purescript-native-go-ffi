@@ -21,7 +21,7 @@ func init() {
 				length = end - start + 1
 				step = 1
 			}
-			ns := make([]Any, 0, length)
+			ns := make(Array, 0, length)
 			for i := start; i != end; i += step {
 				ns = append(ns, i)
 			}
@@ -30,7 +30,7 @@ func init() {
 	}
 
 	exports["length"] = func(xs_ Any) Any {
-		xs, _ := xs_.([]Any)
+		xs, _ := xs_.(Array)
 		return len(xs)
 	}
 
@@ -38,12 +38,12 @@ func init() {
 		return func(nothing Any) Any {
 			return func(xs_ Any) Any {
 				return func(i_ Any) Any {
-					xs, _ := xs_.([]Any)
+					xs, _ := xs_.(Array)
 					i, _ := i_.(int)
 					if i < 0 || i >= len(xs) {
 						return nothing
 					} else {
-						return just.(Fn)(xs[i])
+						return Apply(just, xs[i])
 					}
 				}
 			}
@@ -55,7 +55,7 @@ func init() {
 			return func(l_ Any) Any {
 				s := s_.(int)
 				e := e_.(int)
-				l := l_.([]Any)
+				l := l_.(Array)
 				sz := len(l)
 				if s < 0 {
 					s = sz + s

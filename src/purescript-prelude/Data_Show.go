@@ -21,14 +21,13 @@ func init() {
 		return "\"" + fmt.Sprint(s) + "\""
 	}
 
-	exports["showArrayImpl"] = func(f_ Any) Any {
+	exports["showArrayImpl"] = func(f Any) Any {
 		return func(xs_ Any) Any {
-			f, _ := f_.(Fn)
-			xs, _ := xs_.([]Any)
+			xs, _ := xs_.(Array)
 			result := "["
 			length := len(xs)
 			for count, val := range xs {
-				result += fmt.Sprint(f(val))
+				result += fmt.Sprint(Apply(f, val))
 				if count < length-1 {
 					result += ","
 				}

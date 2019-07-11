@@ -24,7 +24,7 @@ func init() {
 
 	exports["eqCharImpl"] = eqImpl
 
-	exports["eqArrayImpl"] = func(f_ Any) Any {
+	exports["eqArrayImpl"] = func(f Any) Any {
 		return func(xs_ Any) Any {
 			return func(ys_ Any) Any {
 				xs := xs_.(Array)
@@ -32,10 +32,8 @@ func init() {
 				if len(xs) != len(ys) {
 					return false
 				}
-				f := f_.(Fn)
 				for i := 0; i < len(xs); i++ {
-					fx, _ := f(xs[i]).(Fn)
-					equal, _ := fx(ys[i]).(bool)
+					equal, _ := Apply(f, xs[i], ys[i]).(bool)
 					if !equal {
 						return false
 					}

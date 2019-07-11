@@ -16,8 +16,8 @@ func init() {
 
 	exports["showNumberImpl"] = func(n_ Any) Any {
 		n, _ := n_.(float64)
-		s := fmt.Sprintf("%v", n)
-		if strings.Contains(s, ".") {
+		s := fmt.Sprintf("%g", n)
+		if strings.Contains(s, ".") || strings.Contains(s, "e") {
 			return s
 		} else {
 			return s + ".0"

@@ -1,14 +1,13 @@
 package purescript_prelude
 
 import (
-	"Data_Show"
 	"fmt"
 	. "purescript"
 	"strings"
 )
 
 func init() {
-	exports := Data_Show.Foreign
+	exports := Foreign("Data.Show")
 
 	exports["showIntImpl"] = func(n Any) Any {
 		return fmt.Sprint(n)

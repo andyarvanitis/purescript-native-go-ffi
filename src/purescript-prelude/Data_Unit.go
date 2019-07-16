@@ -1,9 +1,9 @@
 package purescript_prelude
 
-import "Data_Unit"
+import . "purescript"
 
 func init() {
-	exports := Data_Unit.Foreign
+	exports := Foreign("Data.Unit")
 
 	exports["unit"] = nil
 }

@@ -1,12 +1,9 @@
 package purescript_partial
 
-import (
-	"Partial_Unsafe"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Partial_Unsafe.Foreign
+	exports := Foreign("Partial.Unsafe")
 
 	exports["unsafePartial"] = func(f Any) Any {
 		return Apply(f, nil)

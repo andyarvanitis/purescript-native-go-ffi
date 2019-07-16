@@ -1,9 +1,6 @@
 package purescript_prelude
 
-import (
-	"Data_Eq"
-	. "purescript"
-)
+import . "purescript"
 
 func eqImpl(a Any) Any {
 	return func(b Any) Any {
@@ -12,7 +9,7 @@ func eqImpl(a Any) Any {
 }
 
 func init() {
-	exports := Data_Eq.Foreign
+	exports := Foreign("Data.Eq")
 
 	exports["eqBooleanImpl"] = eqImpl
 

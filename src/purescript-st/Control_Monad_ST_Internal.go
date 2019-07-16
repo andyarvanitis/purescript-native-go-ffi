@@ -1,12 +1,9 @@
 package purescript_st
 
-import (
-	"Control_Monad_ST_Internal"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Control_Monad_ST_Internal.Foreign
+	exports := Foreign("Control.Monad.ST.Internal")
 
 	exports["map_"] = func(f Any) Any {
 		return func(a Any) Any {

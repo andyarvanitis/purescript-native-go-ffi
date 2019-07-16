@@ -1,12 +1,9 @@
 package purescript_prelude
 
-import (
-	"Data_Functor"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Data_Functor.Foreign
+	exports := Foreign("Data.Functor")
 
 	exports["arrayMap"] = func(f Any) Any {
 		return func(xs_ Any) Any {

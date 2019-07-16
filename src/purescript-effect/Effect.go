@@ -1,12 +1,9 @@
 package purescript_effect
 
-import (
-	"Effect_"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Effect_.Foreign
+	exports := Foreign("Effect")
 
 	exports["pureE"] = func(a Any) Any {
 		return func() Any {

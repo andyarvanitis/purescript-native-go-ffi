@@ -1,12 +1,9 @@
 package purescript_refs
 
-import (
-	"Effect_Ref"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Effect_Ref.Foreign
+	exports := Foreign("Effect.Ref")
 
 	exports["new"] = func(val Any) Any {
 		return func() Any {

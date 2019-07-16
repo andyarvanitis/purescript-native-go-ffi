@@ -1,7 +1,6 @@
 package purescript_prelude
 
 import (
-	"Data_EuclideanRing"
 	"math"
 	. "purescript"
 )
@@ -21,7 +20,7 @@ func min(x int, y int) int {
 }
 
 func init() {
-	exports := Data_EuclideanRing.Foreign
+	exports := Foreign("Data.EuclideanRing")
 
 	exports["intDegree"] = func(x_ Any) Any {
 		x, _ := x_.(int)

@@ -1,12 +1,9 @@
 package purescript_assert
 
-import (
-	"Test_Assert"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Test_Assert.Foreign
+	exports := Foreign("Test.Assert")
 
 	exports["assert'"] = func(message Any) Any {
 		return func(success Any) Any {

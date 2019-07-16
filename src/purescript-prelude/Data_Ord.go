@@ -1,9 +1,6 @@
 package purescript_prelude
 
-import (
-	"Data_Ord"
-	. "purescript"
-)
+import . "purescript"
 
 func ordImpl(flt func(Any, Any) bool) Fn {
 	return func(lt Any) Any {
@@ -26,7 +23,7 @@ func ordImpl(flt func(Any, Any) bool) Fn {
 }
 
 func init() {
-	exports := Data_Ord.Foreign
+	exports := Foreign("Data.Ord")
 
 	exports["ordBooleanImpl"] = ordImpl(func(a Any, b Any) bool {
 		ai := 0

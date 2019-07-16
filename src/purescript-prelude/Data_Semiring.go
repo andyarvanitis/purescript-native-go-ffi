@@ -1,12 +1,9 @@
 package purescript_prelude
 
-import (
-	"Data_Semiring"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Data_Semiring.Foreign
+	exports := Foreign("Data.Semiring")
 
 	exports["intAdd"] = func(x Any) Any {
 		return func(y Any) Any {

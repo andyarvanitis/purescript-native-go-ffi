@@ -1,12 +1,10 @@
 package purescript_arrays
 
-import (
-	"Data_Array"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Data_Array.Foreign
+
+	exports := Foreign("Data.Array")
 
 	exports["range"] = func(start_ Any) Any {
 		return func(end_ Any) Any {

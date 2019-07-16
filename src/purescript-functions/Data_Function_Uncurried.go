@@ -1,12 +1,9 @@
 package purescript_functions
 
-import (
-	"Data_Function_Uncurried"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Data_Function_Uncurried.Foreign
+	exports := Foreign("Data.Function.Uncurried")
 
 	exports["mkFn2"] = func(fn Any) Any {
 		return func(a Any, b Any) Any {

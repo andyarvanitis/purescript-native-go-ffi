@@ -1,12 +1,9 @@
 package purescript_prelude
 
-import (
-	"Data_Semigroup"
-	. "purescript"
-)
+import . "purescript"
 
 func init() {
-	exports := Data_Semigroup.Foreign
+	exports := Foreign("Data.Semigroup")
 
 	exports["concatString"] = func(s1 Any) Any {
 		return func(s2 Any) Any {

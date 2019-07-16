@@ -1,8 +1,8 @@
 package purescript_prelude
 
 import (
-	"Data_Bounded"
 	"math"
+	. "purescript"
 	"unicode/utf8"
 )
 
@@ -10,7 +10,7 @@ const maxInt = int((^uint(0)) >> 1)
 const minInt = -maxInt - 1
 
 func init() {
-	exports := Data_Bounded.Foreign
+	exports := Foreign("Data.Bounded")
 
 	exports["topInt"] = maxInt
 	exports["bottomInt"] = minInt

@@ -29,7 +29,7 @@ func init() {
 
 	exports["showArrayImpl"] = func(f Any) Any {
 		return func(xs_ Any) Any {
-			xs, _ := xs_.(Array)
+			xs, _ := xs_.([]Any)
 			result := "["
 			length := len(xs)
 			for count, val := range xs {

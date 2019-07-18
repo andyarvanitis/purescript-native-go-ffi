@@ -13,9 +13,9 @@ func init() {
 
 	exports["concatArray"] = func(xs_ Any) Any {
 		return func(ys_ Any) Any {
-			xs, _ := xs_.(Array)
-			ys, _ := ys_.(Array)
-			result := make(Array, 0, len(xs)+len(ys))
+			xs, _ := xs_.([]Any)
+			ys, _ := ys_.([]Any)
+			result := make([]Any, 0, len(xs)+len(ys))
 			result = append(result, xs...)
 			result = append(result, ys...)
 			return result

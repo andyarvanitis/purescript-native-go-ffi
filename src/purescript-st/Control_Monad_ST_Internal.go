@@ -30,21 +30,21 @@ func init() {
 
 	exports["new"] = func(val Any) Any {
 		return func() Any {
-			return Map{"value": val}
+			return Dict{"value": val}
 		}
 	}
 
 	exports["read"] = func(ref Any) Any {
 		return func() Any {
-			return ref.(Map)["value"]
+			return ref.(Dict)["value"]
 		}
 	}
 
 	exports["modify'"] = func(f Any) Any {
 		return func(ref_ Any) Any {
 			return func() Any {
-				ref, _ := ref_.(Map)
-				t, _ := Apply(f, ref["value"]).(Map)
+				ref, _ := ref_.(Dict)
+				t, _ := Apply(f, ref["value"]).(Dict)
 				ref["value"] = t["state"]
 				return t["value"]
 			}
@@ -54,7 +54,7 @@ func init() {
 	exports["write"] = func(a Any) Any {
 		return func(ref Any) Any {
 			return func() Any {
-				ref.(Map)["value"] = a
+				ref.(Dict)["value"] = a
 				return a
 			}
 		}

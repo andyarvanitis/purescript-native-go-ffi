@@ -24,8 +24,8 @@ func init() {
 	exports["eqArrayImpl"] = func(f Any) Any {
 		return func(xs_ Any) Any {
 			return func(ys_ Any) Any {
-				xs := xs_.(Array)
-				ys := ys_.(Array)
+				xs, _ := xs_.([]Any)
+				ys, _ := ys_.([]Any)
 				if len(xs) != len(ys) {
 					return false
 				}

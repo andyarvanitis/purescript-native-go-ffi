@@ -8,9 +8,11 @@ import (
 	_ "purescript-assert"
 	_ "purescript-console"
 	_ "purescript-effect"
+	_ "purescript-foldable-traversable"
 	_ "purescript-functions"
 	_ "purescript-partial"
 	_ "purescript-prelude"
 	_ "purescript-refs"
 	_ "purescript-st"
+	_ "purescript-strings"
 )

@@ -19,6 +19,17 @@ func init() {
 		}
 	}
 
+  exports["whileE"] = func (f Any) Any {
+    return func (a Any) Any {
+      return func () Any {
+        for Run(f).(bool) {
+          Run(a)
+        }
+        return nil
+      }
+    }
+  }
+
   exports["forE"] = func (lo Any) Any {
     return func (hi Any) Any {
       return func (f Any) Any {

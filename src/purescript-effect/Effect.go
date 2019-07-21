@@ -19,4 +19,16 @@ func init() {
 		}
 	}
 
+  exports["forE"] = func (lo Any) Any {
+    return func (hi Any) Any {
+      return func (f Any) Any {
+        return func () Any {
+          for i := lo.(int); i < hi.(int); i++ {
+            Run(Apply(f, i))
+          }
+          return nil
+        }
+      }
+    }
+  }
 }

@@ -15,4 +15,5 @@ import (
 	_ "purescript-refs"
 	_ "purescript-st"
 	_ "purescript-strings"
+  _ "purescript-random"
 )

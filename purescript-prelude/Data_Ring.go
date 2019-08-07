@@ -1,7 +1,7 @@
 package purescript_prelude
 
 import (
-	. "purescript"
+	. "github.com/purescript-native/go-runtime"
 )
 
 func init() {

@@ -1,6 +1,6 @@
 package purescript_prelude
 
-import . "purescript"
+import . "github.com/purescript-native/go-runtime"
 
 func ordImpl(flt func(Any, Any) bool) Fn {
 	return func(lt Any) Any {

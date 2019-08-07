@@ -1,6 +1,6 @@
 package purescript_partial
 
-import . "purescript"
+import . "github.com/purescript-native/go-runtime"
 
 func init() {
 	exports := Foreign("Partial.Unsafe")

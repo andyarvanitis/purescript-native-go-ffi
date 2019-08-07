@@ -1,7 +1,7 @@
 package purescript_strings
 
 import (
-	. "purescript"
+	. "github.com/purescript-native/go-runtime"
 	"strings"
 )
 

@@ -2,7 +2,7 @@ package purescript_prelude
 
 import (
 	"fmt"
-	. "purescript"
+	. "github.com/purescript-native/go-runtime"
 	"strings"
 )
 

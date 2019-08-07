@@ -1,6 +1,6 @@
 package purescript_st
 
-import . "purescript"
+import . "github.com/purescript-native/go-runtime"
 
 func init() {
 	exports := Foreign("Control.Monad.ST.Internal")

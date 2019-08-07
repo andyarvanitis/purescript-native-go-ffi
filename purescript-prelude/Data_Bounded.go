@@ -1,8 +1,8 @@
 package purescript_prelude
 
 import (
+	. "github.com/purescript-native/go-runtime"
 	"math"
-	. "purescript"
 	"unicode/utf8"
 )
 

@@ -1,6 +1,6 @@
 package purescript_foldable_traversable
 
-import . "purescript"
+import . "github.com/purescript-native/go-runtime"
 
 func init() {
 	exports := Foreign("Data.Foldable")

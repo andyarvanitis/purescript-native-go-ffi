@@ -2,8 +2,8 @@ package purescript_console
 
 import (
 	"fmt"
+	. "github.com/purescript-native/go-runtime"
 	"os"
-	. "purescript"
 )
 
 func init() {

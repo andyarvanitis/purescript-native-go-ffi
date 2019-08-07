@@ -1,8 +1,8 @@
 package purescript_random
 
 import (
+	. "github.com/purescript-native/go-runtime"
 	"math/rand"
-	. "purescript"
 	"time"
 )
 

@@ -1,6 +1,6 @@
 package purescript_arrays
 
-import . "purescript"
+import . "github.com/purescript-native/go-runtime"
 
 func init() {
 

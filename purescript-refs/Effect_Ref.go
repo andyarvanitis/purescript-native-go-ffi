@@ -1,6 +1,6 @@
 package purescript_refs
 
-import . "purescript"
+import . "github.com/purescript-native/go-runtime"
 
 func init() {
 	exports := Foreign("Effect.Ref")

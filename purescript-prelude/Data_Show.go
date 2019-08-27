@@ -2,8 +2,9 @@ package purescript_prelude
 
 import (
 	"fmt"
-	. "github.com/purescript-native/go-runtime"
 	"strings"
+
+	. "github.com/purescript-native/go-runtime"
 )
 
 func init() {
@@ -40,6 +41,25 @@ func init() {
 			}
 			result += "]"
 			return result
+		}
+	}
+
+	exports["cons"] = func(head_ Any) Any {
+		return func(tail_ Any) Any {
+			return append([]Any{head_}, tail_.([]Any)...)
+		}
+	}
+
+	exports["join"] = func(separator_ Any) Any {
+		return func(xs_ Any) Any {
+			xs := xs_.([]Any)
+			ss := make([]string, len(xs))
+			for i, x := range xs {
+				ss[i] = x.(string)
+			}
+
+			res := strings.Join(ss, separator_.(string))
+			return res
 		}
 	}
 

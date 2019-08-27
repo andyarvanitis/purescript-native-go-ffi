@@ -7,6 +7,12 @@ import (
 func init() {
 	exports := Foreign("Record.Unsafe")
 
+	exports["unsafeGet"] = func(label_ Any) Any {
+		return func(rec_ Any) Any {
+			return rec_.(map[string]Any)[label_.(string)]
+		}
+	}
+
 	exports["unsafeSet"] = func(label_ Any) Any {
 		return func(value Any) Any {
 			return func(rec_ Any) Any {

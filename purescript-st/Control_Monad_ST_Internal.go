@@ -30,31 +30,35 @@ func init() {
 
 	exports["new"] = func(val Any) Any {
 		return func() Any {
-			return Dict{"value": val}
+			ptr := new(Any)
+			*ptr = val
+			return ptr
 		}
 	}
 
-	exports["read"] = func(ref Any) Any {
+	exports["read"] = func(ref_ Any) Any {
 		return func() Any {
-			return ref.(Dict)["value"]
+			ref, _ := ref_.(*Any)
+			return *ref
 		}
 	}
 
 	exports["modify'"] = func(f Any) Any {
 		return func(ref_ Any) Any {
 			return func() Any {
-				ref, _ := ref_.(Dict)
-				t, _ := Apply(f, ref["value"]).(Dict)
-				ref["value"] = t["state"]
+				ref, _ := ref_.(*Any)
+				t, _ := Apply(f, *ref).(Dict)
+				*ref = t["state"]
 				return t["value"]
 			}
 		}
 	}
 
 	exports["write"] = func(a Any) Any {
-		return func(ref Any) Any {
+		return func(ref_ Any) Any {
 			return func() Any {
-				ref.(Dict)["value"] = a
+				ref, _ := ref_.(*Any)
+				*ref = a
 				return a
 			}
 		}

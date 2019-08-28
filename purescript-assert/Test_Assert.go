@@ -1,6 +1,9 @@
 package purescript_assert
 
-import . "github.com/purescript-native/go-runtime"
+import (
+	"errors"
+	. "github.com/purescript-native/go-runtime"
+)
 
 func init() {
 	exports := Foreign("Test.Assert")
@@ -13,6 +16,27 @@ func init() {
 				}
 				return nil
 			}
+		}
+	}
+
+	exports["checkThrows"] = func(f Any) Any {
+		return func() Any {
+			result := false
+			func() {
+				defer func() {
+					if e := recover(); e != nil {
+						switch e.(type) {
+						case error:
+							result = true
+						default:
+							err := errors.New("Threw something other than an 'error'")
+							panic(err)
+						}
+					}
+				}()
+				Run(f)
+			}()
+			return result
 		}
 	}
 

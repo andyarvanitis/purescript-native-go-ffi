@@ -65,4 +65,26 @@ func init() {
 			}
 		}
 	}
+
+	exports["zipWith"] = func(f_ Any) Any {
+		return func(xs_ Any) Any {
+			return func(ys_ Any) Any {
+				f, _ := f_.(Fn)
+				xs, _ := xs_.([]Any)
+				ys, _ := ys_.([]Any)
+				lxs := len(xs)
+				l := len(ys)
+				if lxs < l {
+					l = lxs
+				}
+				result := make([]Any, 0, l)
+				for i := 0; i < l; i++ {
+					fx, _ := f(xs[i]).(Fn)
+					result = append(result, fx(ys[i]))
+				}
+				return result
+			}
+		}
+	}
+
 }

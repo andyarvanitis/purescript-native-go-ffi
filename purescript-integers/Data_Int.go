@@ -25,4 +25,13 @@ func init() {
 			}
 		}
 	}
+
+	exports["pow"] = func(n_ Any) Any {
+		return func(p_ Any) Any {
+			n, _ := n_.(int)
+			p, _ := p_.(int)
+			return int(math.Pow(float64(n), float64(p)))
+		}
+	}
+
 }

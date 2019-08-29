@@ -1,6 +1,8 @@
 package purescript_effect
 
-import . "github.com/purescript-native/go-runtime"
+import (
+	. "github.com/purescript-native/go-runtime"
+)
 
 func init() {
 	exports := Foreign("Effect")
@@ -50,4 +52,16 @@ func init() {
 			}
 		}
 	}
+
+	exports["foreachE"] = func(as Any) Any {
+		return func(f Any) Any {
+			return func() Any {
+				for _, a := range as.([]Any) {
+					Run(Apply(f, a))
+				}
+				return nil
+			}
+		}
+	}
+
 }

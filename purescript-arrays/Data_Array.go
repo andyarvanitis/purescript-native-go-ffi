@@ -48,6 +48,16 @@ func init() {
 		}
 	}
 
+	exports["reverse"] = func(xs_ Any) Any {
+		xs := xs_.([]Any)
+		l := len(xs)
+		ys := make([]Any, l)
+		for i, j := 0, l-1; i < l; i, j = i+1, j-1 {
+			ys[i] = xs[j]
+		}
+		return ys
+	}
+
 	exports["slice"] = func(s_ Any) Any {
 		return func(e_ Any) Any {
 			return func(l_ Any) Any {

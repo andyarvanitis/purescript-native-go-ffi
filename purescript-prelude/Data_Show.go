@@ -24,6 +24,10 @@ func init() {
 		}
 	}
 
+	exports["showCharImpl"] = func(s Any) Any {
+		return fmt.Sprintf("%q", s)
+	}
+
 	exports["showStringImpl"] = func(s Any) Any {
 		return "\"" + fmt.Sprint(s) + "\""
 	}

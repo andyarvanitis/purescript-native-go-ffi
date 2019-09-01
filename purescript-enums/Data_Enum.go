@@ -1,4 +1,4 @@
-package purescript_global
+package purescript_enums
 
 import (
 	. "github.com/purescript-native/go-runtime"

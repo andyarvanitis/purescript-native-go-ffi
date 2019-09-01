@@ -5,6 +5,7 @@ import (
 	. "github.com/purescript-native/go-runtime"
 	"regexp"
 	"strings"
+	"unicode/utf8"
 )
 
 type regex_pair struct {
@@ -45,11 +46,7 @@ func init() {
 			p := p_.(regex_pair)
 			r := p.regex
 			s, _ := s_.(string)
-			if r.FindStringIndex(s) != nil {
-				return true
-			} else {
-				return false
-			}
+			return r.MatchString(s)
 		}
 	}
 
@@ -144,7 +141,8 @@ func init() {
 					if found == nil {
 						return nothing
 					}
-					return Apply(just, found[0])
+					// TODO: is there a way to do this that is faster?
+					return Apply(just, utf8.RuneCountInString(s[:found[0]]))
 				}
 			}
 		}

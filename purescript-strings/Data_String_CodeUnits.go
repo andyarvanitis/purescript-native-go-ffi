@@ -169,7 +169,7 @@ func init() {
 						if startAt < 0 || startAt > len(runes) {
 							return nothing
 						}
-						substr := string(runes[:min(startAt+len(x), len(runes))])
+						substr := string(runes[:min(startAt+utf8.RuneCountInString(x), len(runes))])
 						i := strings.LastIndex(substr, x)
 						if i == -1 {
 							return nothing

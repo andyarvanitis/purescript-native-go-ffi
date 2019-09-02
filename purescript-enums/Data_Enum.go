@@ -14,8 +14,9 @@ func init() {
 		return int(r)
 	}
 
-}
+	exports["fromCharCode"] = func(i_ Any) Any {
+		i, _ := i_.(int)
+		return string(rune(i))
+	}
 
-// exports.fromCharCode = function (c) {
-//   return String.fromCharCode(c);
-// };
+}

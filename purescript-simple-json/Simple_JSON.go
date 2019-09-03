@@ -14,7 +14,7 @@ func init() {
 		var result Any
 		err := json.Unmarshal([]byte(text), &result)
 		if err != nil {
-			panic(err)
+			panic(err.Error())
 		}
 		return result
 	}

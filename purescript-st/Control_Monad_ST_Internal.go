@@ -13,6 +13,12 @@ func init() {
 		}
 	}
 
+	exports["pure_"] = func(a Any) Any {
+		return func() Any {
+			return a
+		}
+	}
+
 	exports["run"] = func(f Any) Any {
 		return Run(f)
 	}

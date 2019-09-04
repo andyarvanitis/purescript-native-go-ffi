@@ -9,8 +9,8 @@ import (
 func init() {
 	exports := Foreign("Global.Unsafe")
 
-	exports["unsafeStringify"] = func(value_ Any) Any {
-		blob, err := json.Marshal(value_)
+	exports["unsafeStringify"] = func(value Any) Any {
+		blob, err := json.Marshal(value)
 		if err != nil {
 			panic(err.Error())
 		}

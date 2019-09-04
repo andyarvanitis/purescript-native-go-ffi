@@ -3,6 +3,7 @@ package purescript_exceptions
 import (
 	"errors"
 	"fmt"
+
 	. "github.com/purescript-native/go-runtime"
 )
 
@@ -14,7 +15,8 @@ func init() {
 	}
 
 	exports["message"] = func(e_ Any) Any {
-		return e_.(error).Error()
+		e, _ := e_.(error)
+		return e.Error()
 	}
 
 	exports["throwException"] = func(e Any) Any {

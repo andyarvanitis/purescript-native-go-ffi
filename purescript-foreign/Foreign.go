@@ -7,16 +7,16 @@ import (
 func init() {
 	exports := Foreign("Foreign")
 
-	exports["unsafeToForeign"] = func(value_ Any) Any {
-		return value_
+	exports["unsafeToForeign"] = func(value Any) Any {
+		return value
 	}
 
-	exports["unsafeFromForeign"] = func(value_ Any) Any {
-		return value_
+	exports["unsafeFromForeign"] = func(value Any) Any {
+		return value
 	}
 
-	exports["typeOf"] = func(value_ Any) Any {
-		switch value_.(type) {
+	exports["typeOf"] = func(value Any) Any {
+		switch value.(type) {
 		//NOTE: do not use Any interface in type switches
 		case string:
 			return "string"
@@ -41,8 +41,8 @@ func init() {
 		}
 	}
 
-	exports["tagOf"] = func(value_ Any) Any {
-		switch value_.(type) {
+	exports["tagOf"] = func(value Any) Any {
+		switch value.(type) {
 		//NOTE: do not use Any interface in type switches
 		case string:
 			return "String"
@@ -67,17 +67,17 @@ func init() {
 		}
 	}
 
-	exports["isNull"] = func(value_ Any) Any {
-		return value_ == nil
+	exports["isNull"] = func(value Any) Any {
+		return value == nil
 	}
 
-	exports["isUndefined"] = func(value_ Any) Any {
+	exports["isUndefined"] = func(value Any) Any {
 		return false
 	}
 
-	exports["isArray"] = func(value_ Any) Any {
+	exports["isArray"] = func(value Any) Any {
 		//NOTE: do not use Any interface here
-		_, ok := value_.([]interface{})
+		_, ok := value.([]interface{})
 		return ok
 	}
 }

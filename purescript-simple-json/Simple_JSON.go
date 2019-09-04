@@ -10,10 +10,9 @@ func init() {
 	exports := Foreign("Simple.JSON")
 
 	exports["_parseJSON"] = func(text_ Any) Any {
-		text := text_.(string)
+		text, _ := text_.(string)
 		var result Any
-		err := json.Unmarshal([]byte(text), &result)
-		if err != nil {
+		if err := json.Unmarshal([]byte(text), &result); err != nil {
 			panic(err.Error())
 		}
 		return result

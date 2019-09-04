@@ -8,20 +8,20 @@ func init() {
 	exports := Foreign("Record.Builder")
 
 	exports["copyRecord"] = func(rec_ Any) Any {
-		rec := rec_.(map[string]Any)
-		recCopy := make(map[string]Any)
+		rec, _ := rec_.(Dict)
+		cpy := make(Dict)
 		for key, value := range rec {
-			recCopy[key] = value
+			cpy[key] = value
 		}
-		return recCopy
+		return cpy
 	}
 
 	exports["unsafeInsert"] = func(l_ Any) Any {
-		return func(a_ Any) Any {
+		return func(a Any) Any {
 			return func(rec_ Any) Any {
-				l := l_.(string)
-				rec := rec_.(map[string]Any)
-				rec[l] = a_
+				l, _ := l_.(string)
+				rec, _ := rec_.(Dict)
+				rec[l] = a
 				return rec
 			}
 		}

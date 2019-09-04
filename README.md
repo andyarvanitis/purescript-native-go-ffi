@@ -3,6 +3,7 @@
 Note that many values are currently missing. Only a minimum set has been implemented – just beyond enough for the standard compiler tests to pass. Please feel free to contribute any that you have implemented yourself (via a pull request).
 
 #### Some basic conventions used in this code (not absolutely required, but please try to follow them)
+* Run your code through `gofmt`
 * Use provided type alias `Any` instead of `interface{}`
 * Use provided type alias `Dict` instead of `map[string]Any` (intended for when you're dealing with ps records)
 * Use provided type `[]Any` for arrays

@@ -17,4 +17,6 @@ func init() {
 		}
 		return result
 	}
+
+	exports["_undefined"] = nil
 }

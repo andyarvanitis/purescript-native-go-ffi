@@ -35,6 +35,9 @@ func init() {
 		case Any:
 			return "object"
 
+		case nil:
+			return "object"
+
 		default:
 			return "undefined"
 		}
@@ -60,8 +63,11 @@ func init() {
 		case Any:
 			return "Array"
 
+		case nil:
+			return "Null"
+
 		default:
-			return "Object"
+			return "Undefined"
 		}
 	}
 

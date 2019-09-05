@@ -17,7 +17,6 @@ func init() {
 
 	exports["typeOf"] = func(value Any) Any {
 		switch value.(type) {
-		//NOTE: do not use Any interface in type switches
 		case string:
 			return "string"
 
@@ -30,10 +29,10 @@ func init() {
 		case bool:
 			return "boolean"
 
-		case map[string]interface{}:
+		case Dict:
 			return "object"
 
-		case []interface{}:
+		case Any:
 			return "object"
 
 		default:
@@ -43,7 +42,6 @@ func init() {
 
 	exports["tagOf"] = func(value Any) Any {
 		switch value.(type) {
-		//NOTE: do not use Any interface in type switches
 		case string:
 			return "String"
 
@@ -56,10 +54,10 @@ func init() {
 		case bool:
 			return "Boolean"
 
-		case map[string]interface{}:
+		case Dict:
 			return "Object"
 
-		case []interface{}:
+		case Any:
 			return "Array"
 
 		default:
@@ -76,8 +74,7 @@ func init() {
 	}
 
 	exports["isArray"] = func(value Any) Any {
-		//NOTE: do not use Any interface here
-		_, ok := value.([]interface{})
+		_, ok := value.([]Any)
 		return ok
 	}
 }

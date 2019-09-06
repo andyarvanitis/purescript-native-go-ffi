@@ -162,10 +162,10 @@ func init() {
 				return func(a Any) Any {
 					return func(xs_ Any) Any {
 						just, xs, i := just_.(Fn), xs_.([]Any), i_.(int)
-						if i < 0 || i >= len(xs) {
+						if i < 0 || i > len(xs) {
 							return nothing
 						}
-						ys := make([]Any, len(xs))
+						ys := make([]Any, len(xs)+1)
 						copy(ys, xs[:i])
 						ys[i] = a
 						copy(ys[i+1:], xs[i:])

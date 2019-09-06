@@ -1,6 +1,10 @@
 package purescript_arrays
 
-import . "github.com/purescript-native/go-runtime"
+import (
+	"sort"
+
+	. "github.com/purescript-native/go-runtime"
+)
 
 func init() {
 
@@ -70,9 +74,36 @@ func init() {
 	// Extending arrays ------------------------------------------------------------
 	//------------------------------------------------------------------------------
 
+	exports["cons"] = func(e Any) Any {
+		return func(l Any) Any {
+			return append([]Any{e}, l.([]Any)...)
+		}
+	}
+
+	exports["snoc"] = func(l_ Any) Any {
+		return func(e Any) Any {
+			l := l_.([]Any)
+			xs := make([]Any, len(l), len(l)+1)
+			copy(xs, l)
+			return append(xs, e)
+		}
+	}
+
 	//------------------------------------------------------------------------------
 	// Non-indexed reads -----------------------------------------------------------
 	//------------------------------------------------------------------------------
+
+	exports["uncons'"] = func(empty_ Any) Any {
+		return func(next Any) Any {
+			return func(xs_ Any) Any {
+				empty, xs := empty_.(Fn), xs_.([]Any)
+				if len(xs) == 0 {
+					return empty(Dict{})
+				}
+				return Apply(next, xs[0], xs[1:])
+			}
+		}
+	}
 
 	//------------------------------------------------------------------------------
 	// Indexed operations ----------------------------------------------------------
@@ -86,8 +117,95 @@ func init() {
 					i, _ := i_.(int)
 					if i < 0 || i >= len(xs) {
 						return nothing
-					} else {
-						return Apply(just, xs[i])
+					}
+					return Apply(just, xs[i])
+				}
+			}
+		}
+	}
+
+	exports["findIndexImpl"] = func(just_ Any) Any {
+		return func(nothing Any) Any {
+			return func(f_ Any) Any {
+				return func(xs_ Any) Any {
+					xs, f, just := xs_.([]Any), f_.(Fn), just_.(Fn)
+					for _, x := range xs {
+						if f(x).(bool) {
+							return just(x)
+						}
+					}
+					return nothing
+				}
+			}
+		}
+	}
+
+	exports["findLastIndexImpl"] = func(just_ Any) Any {
+		return func(nothing Any) Any {
+			return func(f_ Any) Any {
+				return func(xs_ Any) Any {
+					xs, f, just := xs_.([]Any), f_.(Fn), just_.(Fn)
+					for i := len(xs) - 1; i >= 0; i-- {
+						if f(xs[i]).(bool) {
+							return just(xs[i])
+						}
+					}
+					return nothing
+				}
+			}
+		}
+	}
+
+	exports["_insertAt"] = func(just_ Any) Any {
+		return func(nothing Any) Any {
+			return func(i_ Any) Any {
+				return func(a Any) Any {
+					return func(xs_ Any) Any {
+						just, xs, i := just_.(Fn), xs_.([]Any), i_.(int)
+						if i < 0 || i >= len(xs) {
+							return nothing
+						}
+						ys := make([]Any, len(xs))
+						copy(ys, xs[:i])
+						ys[i] = a
+						copy(ys[i+1:], xs[i:])
+						return just(ys)
+					}
+				}
+			}
+		}
+	}
+
+	exports["_deleteAt"] = func(just_ Any) Any {
+		return func(nothing Any) Any {
+			return func(i_ Any) Any {
+				return func(xs_ Any) Any {
+					just, i, xs := just_.(Fn), i_.(int), xs_.([]Any)
+					if i < 0 || i >= len(xs) {
+						return nothing
+					}
+					ys := make([]Any, len(xs)-1)
+					copy(ys, xs[:i])
+					copy(ys[i:], xs[i+1:])
+					return just(ys)
+				}
+			}
+		}
+	}
+
+	exports["_updateAt"] = func(just_ Any) Any {
+		return func(nothing Any) Any {
+			return func(i_ Any) Any {
+				return func(a Any) Any {
+					return func(xs_ Any) Any {
+						just, i, xs := just_.(Fn), i_.(int), xs_.([]Any)
+						if i < 0 || i >= len(xs) {
+							return nothing
+						}
+						ys := make([]Any, len(xs))
+						copy(ys, xs)
+						ys[i] = a
+						return just(ys)
 					}
 				}
 			}
@@ -108,9 +226,58 @@ func init() {
 		return ys
 	}
 
+	exports["concat"] = func(xss_ Any) Any {
+		xss := xss_.([]Any)
+		result := []Any{}
+		for _, xs := range xss {
+			result = append(result, xs.([]Any)...)
+		}
+		return result
+	}
+
+	exports["filter"] = func(f_ Any) Any {
+		return func(xs_ Any) Any {
+			xs, f := xs_.([]Any), f_.(Fn)
+			result := []Any{}
+			for _, x := range xs {
+				if f(x).(bool) {
+					result = append(result, x)
+				}
+			}
+			return result
+		}
+	}
+
+	exports["partition"] = func(f_ Any) Any {
+		return func(xs_ Any) Any {
+			xs, f := xs_.([]Any), f_.(Fn)
+			result := Dict{"yes": []Any{}, "no": []Any{}}
+			for _, x := range xs {
+				if f(x).(bool) {
+					result["yes"] = append(result["yes"].([]Any), x)
+				} else {
+					result["no"] = append(result["no"].([]Any), x)
+				}
+			}
+			return result
+		}
+	}
+
 	//------------------------------------------------------------------------------
 	// Sorting ---------------------------------------------------------------------
 	//------------------------------------------------------------------------------
+
+	exports["sortImpl"] = func(f Any) Any {
+		return func(l_ Any) Any {
+			l := l_.([]Any)
+			xs := make([]Any, len(l))
+			copy(xs, l)
+			sort.SliceStable(xs, func(i int, j int) bool {
+				return Apply(f, xs[i], xs[j]).(int) < 0
+			})
+			return xs
+		}
+	}
 
 	//------------------------------------------------------------------------------
 	// Subarrays -------------------------------------------------------------------
@@ -131,6 +298,32 @@ func init() {
 				}
 				return l[s:e]
 			}
+		}
+	}
+
+	exports["take"] = func(n_ Any) Any {
+		return func(l_ Any) Any {
+			n, l := n_.(int), l_.([]Any)
+			if n < 1 {
+				return []Any{}
+			}
+			if n > len(l) {
+				return l
+			}
+			return l[:n]
+		}
+	}
+
+	exports["drop"] = func(n_ Any) Any {
+		return func(l_ Any) Any {
+			n, l := n_.(int), l_.([]Any)
+			if n < 1 {
+				return l
+			}
+			if n > len(l) {
+				return []Any{}
+			}
+			return l[n:]
 		}
 	}
 
@@ -156,6 +349,17 @@ func init() {
 				}
 				return result
 			}
+		}
+	}
+
+	//------------------------------------------------------------------------------
+	// Partial ---------------------------------------------------------------------
+	//------------------------------------------------------------------------------
+
+	exports["unsafeIndexImpl"] = func(xs_ Any) Any {
+		return func(n_ Any) Any {
+			xs, n := xs_.([]Any), n_.(int)
+			return xs[n]
 		}
 	}
 

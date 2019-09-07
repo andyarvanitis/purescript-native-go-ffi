@@ -129,9 +129,9 @@ func init() {
 			return func(f_ Any) Any {
 				return func(xs_ Any) Any {
 					xs, f, just := xs_.([]Any), f_.(Fn), just_.(Fn)
-					for _, x := range xs {
+					for i, x := range xs {
 						if f(x).(bool) {
-							return just(x)
+							return just(i)
 						}
 					}
 					return nothing
@@ -147,7 +147,7 @@ func init() {
 					xs, f, just := xs_.([]Any), f_.(Fn), just_.(Fn)
 					for i := len(xs) - 1; i >= 0; i-- {
 						if f(xs[i]).(bool) {
-							return just(xs[i])
+							return just(i)
 						}
 					}
 					return nothing

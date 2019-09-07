@@ -34,6 +34,18 @@ func init() {
 		}
 	}
 
+	exports["foreach"] = func(as_ Any) Any {
+		return func(f_ Any) Any {
+			return func() Any {
+				as, f := as_.([]Any), f_.(Fn)
+				for i := range as {
+					f(as[i]).(EffFn)()
+				}
+				return nil
+			}
+		}
+	}
+
 	exports["new"] = func(val Any) Any {
 		return func() Any {
 			ptr := new(Any)

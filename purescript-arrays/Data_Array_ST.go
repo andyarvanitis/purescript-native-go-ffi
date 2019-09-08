@@ -47,6 +47,8 @@ func init() {
 				return &ys
 			case *[]Any:
 				return append([]Any{}, *xs...)
+			default:
+				panic("The value passed to copyImpl is neither an Array nor Array pointer")
 			}
 		}
 	}

@@ -1,6 +1,8 @@
 package purescript_st
 
-import . "github.com/purescript-native/go-runtime"
+import (
+	. "github.com/purescript-native/go-runtime"
+)
 
 func init() {
 	exports := Foreign("Control.Monad.ST.Internal")
@@ -16,6 +18,15 @@ func init() {
 	exports["pure_"] = func(a Any) Any {
 		return func() Any {
 			return a
+		}
+	}
+
+	exports["bind_"] = func(a Any) Any {
+		return func(f Any) Any {
+			return func() Any {
+				f, a := f.(Fn), a.(EffFn)
+				return f(a()).(EffFn)()
+			}
 		}
 	}
 

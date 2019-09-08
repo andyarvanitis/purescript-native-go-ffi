@@ -1,6 +1,8 @@
 package purescript_arrays
 
 import (
+	"fmt"
+
 	. "github.com/purescript-native/go-runtime"
 )
 
@@ -10,6 +12,22 @@ func init() {
 
 	exports["empty"] = func() Any {
 		return new([]Any)
+	}
+
+	exports["peekImpl"] = func(just_ Any) Any {
+		return func(nothing Any) Any {
+			return func(i_ Any) Any {
+				return func(xs_ Any) Any {
+					return func() Any {
+						just, i, xs := just_.(Fn), i_.(int), xs_.(*[]Any)
+						if i >= 0 && i < len(*xs) {
+							return just((*xs)[i])
+						}
+						return nothing
+					}
+				}
+			}
+		}
 	}
 
 	exports["poke"] = func(i_ Any) Any {
@@ -43,9 +61,11 @@ func init() {
 			// Temporary solution for the usage of copyImpl in both `freeze` and `thaw` of STArray
 			switch xs := xs_.(type) {
 			case []Any:
+				fmt.Println(xs)
 				ys := append([]Any{}, xs...)
 				return &ys
 			case *[]Any:
+				fmt.Println(*xs)
 				return append([]Any{}, *xs...)
 			default:
 				panic("The value passed to copyImpl is neither an Array nor Array pointer")

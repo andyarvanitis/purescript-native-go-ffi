@@ -1,8 +1,6 @@
 package purescript_arrays
 
 import (
-	"fmt"
-
 	. "github.com/purescript-native/go-runtime"
 )
 
@@ -56,20 +54,32 @@ func init() {
 		}
 	}
 
-	exports["copyImpl"] = func(xs_ Any) Any {
+	exports["unsafeFreeze"] = func(xs_ Any) Any {
 		return func() Any {
-			// Temporary solution for the usage of copyImpl in both `freeze` and `thaw` of STArray
-			switch xs := xs_.(type) {
-			case []Any:
-				fmt.Println(xs)
-				ys := append([]Any{}, xs...)
-				return &ys
-			case *[]Any:
-				fmt.Println(*xs)
-				return append([]Any{}, *xs...)
-			default:
-				panic("The value passed to copyImpl is neither an Array nor Array pointer")
-			}
+			xs, _ := xs_.(*[]Any)
+			return *xs
+		}
+	}
+
+	exports["unsafeThaw"] = func(xs_ Any) Any {
+		return func() Any {
+			xs, _ := xs_.([]Any)
+			return &xs
+		}
+	}
+
+	exports["freeze"] = func(xs_ Any) Any {
+		return func() Any {
+			xs, _ := xs_.(*[]Any)
+			return append([]Any{}, *xs...)
+		}
+	}
+
+	exports["thaw"] = func(xs_ Any) Any {
+		return func() Any {
+			xs, _ := xs_.([]Any)
+			result := append([]Any{}, xs...)
+			return &result
 		}
 	}
 

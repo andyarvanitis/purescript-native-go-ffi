@@ -1,6 +1,8 @@
 package purescript_st
 
-import . "github.com/purescript-native/go-runtime"
+import (
+	. "github.com/purescript-native/go-runtime"
+)
 
 func init() {
 	exports := Foreign("Control.Monad.ST.Internal")
@@ -19,6 +21,15 @@ func init() {
 		}
 	}
 
+	exports["bind_"] = func(a Any) Any {
+		return func(f Any) Any {
+			return func() Any {
+				f, a := f.(Fn), a.(EffFn)
+				return f(a()).(EffFn)()
+			}
+		}
+	}
+
 	exports["run"] = func(f Any) Any {
 		return Run(f)
 	}
@@ -28,6 +39,18 @@ func init() {
 			return func() Any {
 				for Run(f).(bool) {
 					Run(a)
+				}
+				return nil
+			}
+		}
+	}
+
+	exports["foreach"] = func(as_ Any) Any {
+		return func(f_ Any) Any {
+			return func() Any {
+				as, f := as_.([]Any), f_.(Fn)
+				for i := range as {
+					f(as[i]).(EffFn)()
 				}
 				return nil
 			}

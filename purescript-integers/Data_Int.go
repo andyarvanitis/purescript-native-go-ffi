@@ -17,11 +17,18 @@ func init() {
 		return func(nothing Any) Any {
 			return func(n_ Any) Any {
 				just, _ := just_.(Fn)
-				n := n_.(float64)
-				if math.Round(n) == n {
-					return just(int(n))
-				} else {
-					return nothing
+				switch n_.(type) {
+				case int64:
+					return just(n_)
+				case int:
+					return just(n_)
+				default:
+					n := n_.(float64)
+					if math.Round(n) == n {
+						return just(int(n))
+					} else {
+						return nothing
+					}
 				}
 			}
 		}

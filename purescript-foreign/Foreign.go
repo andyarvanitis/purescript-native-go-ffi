@@ -54,6 +54,9 @@ func init() {
 		case int:
 			return "Number"
 
+		case int64:
+			return "Number"
+
 		case bool:
 			return "Boolean"
 

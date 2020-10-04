@@ -34,4 +34,8 @@ func init() {
 		}
 	}
 
+	exports["round"] = func(x_ Any) Any {
+		x, _ := x_.(float64)
+		return math.Round(x)
+	}
 }

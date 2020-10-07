@@ -16,7 +16,7 @@ type regex_pair struct {
 func init() {
 	exports := Foreign("Data.String.Regex")
 
-	exports["regex'"] = func(left Any) Any {
+	exports["regexImpl"] = func(left Any) Any {
 		return func(right Any) Any {
 			return func(s_ Any) Any {
 				return func(flags_ Any) Any {
@@ -98,7 +98,7 @@ func init() {
 		}
 	}
 
-	exports["replace'"] = func(p_ Any) Any {
+	exports["replaceBy"] = func(p_ Any) Any {
 		return func(f Any) Any {
 			return func(s_ Any) Any {
 				p := p_.(regex_pair)

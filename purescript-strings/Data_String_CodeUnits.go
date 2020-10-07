@@ -114,7 +114,7 @@ func init() {
 		}
 	}
 
-	exports["_indexOf'"] = func(just Any) Any {
+	exports["_indexOfStartingAt"] = func(just Any) Any {
 		return func(nothing Any) Any {
 			return func(x_ Any) Any {
 				return func(startAt_ Any) Any {
@@ -157,7 +157,7 @@ func init() {
 		}
 	}
 
-	exports["_lastIndexOf'"] = func(just Any) Any {
+	exports["_lastIndexOfStartingAt"] = func(just Any) Any {
 		return func(nothing Any) Any {
 			return func(x_ Any) Any {
 				return func(startAt_ Any) Any {

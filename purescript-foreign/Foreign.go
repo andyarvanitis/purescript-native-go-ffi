@@ -76,7 +76,7 @@ func init() {
 	}
 
 	exports["isUndefined"] = func(value Any) Any {
-		return false
+		return value == Undefined
 	}
 
 	exports["isArray"] = func(value Any) Any {

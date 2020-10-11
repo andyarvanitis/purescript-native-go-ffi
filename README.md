@@ -14,17 +14,10 @@ Note that many values are currently missing. Only a minimum set has been impleme
       return bar
     }
     ```
-* For input parameters needing a type assertion from `Any` to a concrete type, use a name with a trailing underscore, then declare a type-inferred variable, with underscore removed, assigning the type assertion operation to it. This also allows the possiblity of a faster type assertion – getting and ignoring a failure code instead of a `panic`. When debugging, you might want to restore the `panic` possiblity until you're sure it's not an issue.
+* If you need to create a local variable from an argument type assertion (for readability, performance, etc.), name the parameter with a trailing underscore. Then create a type-inferred variable declaration with assignment, with the trailing underscore removed from the name.
   * For example:
   ```go
   exports["foo"] = func(bar_ Any) Any {
-    bar, _ := bar_.(int) // the ", _" gets and ignores the error flag
-    ...
-  }
-  ```
-  * And when debugging:
-  ```go
-  exports["foo"] = func(bar_ Any) Any {
-    bar := bar_.(int) // remove ", _" to get friendly type assertion panics
+    bar := bar_.(int)
     ...
   }

@@ -8,7 +8,7 @@ func init() {
 	exports["foldrArray"] = func(f Any) Any {
 		return func(init Any) Any {
 			return func(xs_ Any) Any {
-				xs, _ := xs_.([]Any)
+				xs := xs_.([]Any)
 				var acc = init
 				length := len(xs)
 				for i := length - 1; i >= 0; i-- {
@@ -22,7 +22,7 @@ func init() {
 	exports["foldlArray"] = func(f Any) Any {
 		return func(init Any) Any {
 			return func(xs_ Any) Any {
-				xs, _ := xs_.([]Any)
+				xs := xs_.([]Any)
 				var acc = init
 				for _, x := range xs {
 					acc = Apply(f, acc, x)

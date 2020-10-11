@@ -15,7 +15,7 @@ func init() {
 
 	exports["read"] = func(ref_ Any) Any {
 		return func() Any {
-			ref, _ := ref_.(*Any)
+			ref := ref_.(*Any)
 			return *ref
 		}
 	}
@@ -23,8 +23,8 @@ func init() {
 	exports["modify'"] = func(f Any) Any {
 		return func(ref_ Any) Any {
 			return func() Any {
-				ref, _ := ref_.(*Any)
-				t, _ := Apply(f, *ref).(Dict)
+				ref := ref_.(*Any)
+				t := Apply(f, *ref).(Dict)
 				*ref = t["state"]
 				return t["value"]
 			}
@@ -34,7 +34,7 @@ func init() {
 	exports["write"] = func(a Any) Any {
 		return func(ref_ Any) Any {
 			return func() Any {
-				ref, _ := ref_.(*Any)
+				ref := ref_.(*Any)
 				*ref = a
 				return nil
 			}

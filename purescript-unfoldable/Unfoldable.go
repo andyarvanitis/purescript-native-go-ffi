@@ -11,16 +11,16 @@ func init() {
 				return func(snd_ Any) Any {
 					return func(f_ Any) Any {
 						return func(b Any) Any {
-							isNothing, _ := isNothing_.(Fn)
-							fromJust, _ := fromJust_.(Fn)
-							fst, _ := fst_.(Fn)
-							snd, _ := snd_.(Fn)
-							f, _ := f_.(Fn)
+							isNothing := isNothing_.(Fn)
+							fromJust := fromJust_.(Fn)
+							fst := fst_.(Fn)
+							snd := snd_.(Fn)
+							f := f_.(Fn)
 							result := make([]Any, 0)
 							value := b
 							for {
 								maybe := f(value)
-								nothing, _ := isNothing(maybe).(bool)
+								nothing := isNothing(maybe).(bool)
 								if nothing {
 									return result
 								}

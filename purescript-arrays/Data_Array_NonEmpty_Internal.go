@@ -8,7 +8,7 @@ func init() {
 
 	exports["fold1Impl"] = func(f Any) Any {
 		return func(xs_ Any) Any {
-			xs, _ := xs_.([]Any)
+			xs := xs_.([]Any)
 			acc := xs[0]
 			for i := 1; i < len(xs); i++ {
 				acc = Apply(f, acc, xs[i])

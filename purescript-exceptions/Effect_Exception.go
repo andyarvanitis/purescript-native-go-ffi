@@ -27,8 +27,8 @@ func init() {
 	exports["catchException"] = func(c_ Any) Any {
 		return func(t_ Any) Any {
 			return func() Any {
-				c, _ := c_.(Fn)
-				t, _ := t_.(EffFn)
+				c := c_.(Fn)
+				t := t_.(EffFn)
 				var result Any = nil
 				func() {
 					defer func() {

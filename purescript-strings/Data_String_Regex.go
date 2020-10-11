@@ -20,8 +20,8 @@ func init() {
 		return func(right Any) Any {
 			return func(s_ Any) Any {
 				return func(flags_ Any) Any {
-					s, _ := s_.(string)
-					flags, _ := flags_.(string)
+					s := s_.(string)
+					flags := flags_.(string)
 					global := false
 					if strings.Contains(flags, "g") {
 						global = true
@@ -45,7 +45,7 @@ func init() {
 		return func(s_ Any) Any {
 			p := p_.(regex_pair)
 			r := p.regex
-			s, _ := s_.(string)
+			s := s_.(string)
 			return r.MatchString(s)
 		}
 	}
@@ -56,7 +56,7 @@ func init() {
 				return func(s_ Any) Any {
 					p := p_.(regex_pair)
 					r := p.regex
-					s, _ := s_.(string)
+					s := s_.(string)
 					ms := r.FindAllString(s, -1)
 					if ms == nil {
 						return nothing
@@ -82,8 +82,8 @@ func init() {
 				r := p.regex
 				global := p.global
 
-				s1, _ := s1_.(string)
-				s2, _ := s2_.(string)
+				s1 := s1_.(string)
+				s2 := s2_.(string)
 
 				if global {
 					return r.ReplaceAllString(s2, s1)
@@ -104,7 +104,7 @@ func init() {
 				p := p_.(regex_pair)
 				r := p.regex
 				global := p.global
-				s, _ := s_.(string)
+				s := s_.(string)
 
 				all := r.FindAllString(s, -1)
 				submatches := make([]Any, 0, len(all))
@@ -136,7 +136,7 @@ func init() {
 				return func(s_ Any) Any {
 					p := p_.(regex_pair)
 					r := p.regex
-					s, _ := s_.(string)
+					s := s_.(string)
 					found := r.FindStringIndex(s)
 					if found == nil {
 						return nothing
@@ -152,7 +152,7 @@ func init() {
 		return func(s_ Any) Any {
 			p := p_.(regex_pair)
 			r := p.regex
-			s, _ := s_.(string)
+			s := s_.(string)
 			ss := r.Split(s, -1)
 			result := make([]Any, 0, len(ss))
 			for _, str := range ss {

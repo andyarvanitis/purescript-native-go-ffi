@@ -16,8 +16,8 @@ func init() {
 
 	exports["range"] = func(start_ Any) Any {
 		return func(end_ Any) Any {
-			start, _ := start_.(int)
-			end, _ := end_.(int)
+			start := start_.(int)
+			end := end_.(int)
 			var length int
 			var step int
 			if start > end {
@@ -112,8 +112,8 @@ func init() {
 		return func(nothing Any) Any {
 			return func(xs_ Any) Any {
 				return func(i_ Any) Any {
-					xs, _ := xs_.([]Any)
-					i, _ := i_.(int)
+					xs := xs_.([]Any)
+					i := i_.(int)
 					if i < 0 || i >= len(xs) {
 						return nothing
 					}
@@ -333,9 +333,9 @@ func init() {
 	exports["zipWith"] = func(f_ Any) Any {
 		return func(xs_ Any) Any {
 			return func(ys_ Any) Any {
-				f, _ := f_.(Fn)
-				xs, _ := xs_.([]Any)
-				ys, _ := ys_.([]Any)
+				f := f_.(Fn)
+				xs := xs_.([]Any)
+				ys := ys_.([]Any)
 				lxs := len(xs)
 				l := len(ys)
 				if lxs < l {
@@ -343,7 +343,7 @@ func init() {
 				}
 				result := make([]Any, 0, l)
 				for i := 0; i < l; i++ {
-					fx, _ := f(xs[i]).(Fn)
+					fx := f(xs[i]).(Fn)
 					result = append(result, fx(ys[i]))
 				}
 				return result

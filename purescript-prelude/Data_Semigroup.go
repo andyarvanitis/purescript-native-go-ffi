@@ -13,8 +13,8 @@ func init() {
 
 	exports["concatArray"] = func(xs_ Any) Any {
 		return func(ys_ Any) Any {
-			xs, _ := xs_.([]Any)
-			ys, _ := ys_.([]Any)
+			xs := xs_.([]Any)
+			ys := ys_.([]Any)
 			result := make([]Any, 0, len(xs)+len(ys))
 			result = append(result, xs...)
 			result = append(result, ys...)

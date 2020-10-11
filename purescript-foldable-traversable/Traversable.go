@@ -25,8 +25,8 @@ func array3(a Any) Any {
 
 func concat2(xs_ Any) Any {
 	return func(ys_ Any) Any {
-		xs, _ := xs_.([]Any)
-		ys, _ := ys_.([]Any)
+		xs := xs_.([]Any)
+		ys := ys_.([]Any)
 		return append(xs, ys...)
 	}
 }
@@ -39,8 +39,8 @@ func init() {
 			return func(pure Any) Any {
 				return func(f_ Any) Any {
 					return func(array_ Any) Any {
-						f, _ := f_.(Fn)
-						array, _ := array_.([]Any)
+						f := f_.(Fn)
+						array := array_.([]Any)
 						var _go func(int, int) Any
 						_go = func(bot int, top int) Any {
 							switch top - bot {

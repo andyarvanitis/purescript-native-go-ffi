@@ -32,7 +32,7 @@ func init() {
 	exports["runFn2"] = func(fn Any) Any {
 		return func(a Any) Any {
 			return func(b Any) Any {
-				f, _ := fn.(Fn2)
+				f := fn.(Fn2)
 				return f(a, b)
 			}
 		}
@@ -42,7 +42,7 @@ func init() {
 		return func(a Any) Any {
 			return func(b Any) Any {
 				return func(c Any) Any {
-					f, _ := fn.(Fn3)
+					f := fn.(Fn3)
 					return f(a, b, c)
 				}
 			}
@@ -54,7 +54,7 @@ func init() {
 			return func(b Any) Any {
 				return func(c Any) Any {
 					return func(d Any) Any {
-						f, _ := fn.(Fn4)
+						f := fn.(Fn4)
 						return f(a, b, c, d)
 					}
 				}
@@ -68,7 +68,7 @@ func init() {
 				return func(c Any) Any {
 					return func(d Any) Any {
 						return func(e Any) Any {
-							f, _ := fn.(Fn5)
+							f := fn.(Fn5)
 							return f(a, b, c, d, e)
 						}
 					}

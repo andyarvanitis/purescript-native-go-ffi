@@ -56,28 +56,28 @@ func init() {
 
 	exports["unsafeFreeze"] = func(xs_ Any) Any {
 		return func() Any {
-			xs, _ := xs_.(*[]Any)
+			xs := xs_.(*[]Any)
 			return *xs
 		}
 	}
 
 	exports["unsafeThaw"] = func(xs_ Any) Any {
 		return func() Any {
-			xs, _ := xs_.([]Any)
+			xs := xs_.([]Any)
 			return &xs
 		}
 	}
 
 	exports["freeze"] = func(xs_ Any) Any {
 		return func() Any {
-			xs, _ := xs_.(*[]Any)
+			xs := xs_.(*[]Any)
 			return append([]Any{}, *xs...)
 		}
 	}
 
 	exports["thaw"] = func(xs_ Any) Any {
 		return func() Any {
-			xs, _ := xs_.([]Any)
+			xs := xs_.([]Any)
 			result := append([]Any{}, xs...)
 			return &result
 		}

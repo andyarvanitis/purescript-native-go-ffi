@@ -9,7 +9,7 @@ func init() {
 
 	exports["mapWithIndexArray"] = func(f Any) Any {
 		return func(xs_ Any) Any {
-			xs, _ := xs_.([]Any)
+			xs := xs_.([]Any)
 			result := make([]Any, 0, len(xs))
 			for i, x := range xs {
 				result = append(result, Apply(f, i, x))

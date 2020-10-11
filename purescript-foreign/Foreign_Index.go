@@ -12,7 +12,7 @@ func init() {
 		if !ok {
 			return f
 		}
-		key, _ := key_.(string)
+		key := key_.(string)
 		return Apply(s, value[key])
 	}
 }

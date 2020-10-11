@@ -16,7 +16,7 @@ func init() {
 	exports["fromNumberImpl"] = func(just_ Any) Any {
 		return func(nothing Any) Any {
 			return func(n_ Any) Any {
-				just, _ := just_.(Fn)
+				just := just_.(Fn)
 				n := n_.(float64)
 				if math.Round(n) == n {
 					return just(int(n))
@@ -29,16 +29,16 @@ func init() {
 
 	exports["pow"] = func(n_ Any) Any {
 		return func(p_ Any) Any {
-			n, _ := n_.(int)
-			p, _ := p_.(int)
+			n := n_.(int)
+			p := p_.(int)
 			return int(math.Pow(float64(n), float64(p)))
 		}
 	}
 
 	exports["toStringAs"] = func(radix_ Any) Any {
 		return func(i_ Any) Any {
-			radix, _ := radix_.(int)
-			i, _ := i_.(int)
+			radix := radix_.(int)
+			i := i_.(int)
 			switch radix {
 			case 2:
 				return fmt.Sprintf("%b", i)

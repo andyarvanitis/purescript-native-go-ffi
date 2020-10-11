@@ -14,9 +14,8 @@ func init() {
 		return fmt.Sprint(n)
 	}
 
-	exports["showNumberImpl"] = func(n_ Any) Any {
-		n, _ := n_.(float64)
-		s := fmt.Sprintf("%g", n)
+	exports["showNumberImpl"] = func(n Any) Any {
+		s := fmt.Sprintf("%g", n.(float64))
 		if strings.Contains(s, ".") || strings.Contains(s, "e") {
 			return s
 		} else {
@@ -48,13 +47,13 @@ func init() {
 		}
 	}
 
-	exports["cons"] = func(head_ Any) Any {
+	exports["cons"] = func(head Any) Any {
 		return func(tail_ Any) Any {
-			return append([]Any{head_}, tail_.([]Any)...)
+			return append([]Any{head}, tail_.([]Any)...)
 		}
 	}
 
-	exports["join"] = func(separator_ Any) Any {
+	exports["join"] = func(separator Any) Any {
 		return func(xs_ Any) Any {
 			xs := xs_.([]Any)
 			ss := make([]string, len(xs))
@@ -62,7 +61,7 @@ func init() {
 				ss[i] = x.(string)
 			}
 
-			res := strings.Join(ss, separator_.(string))
+			res := strings.Join(ss, separator.(string))
 			return res
 		}
 	}

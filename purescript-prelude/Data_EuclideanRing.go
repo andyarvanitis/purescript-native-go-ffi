@@ -22,9 +22,8 @@ func min(x int, y int) int {
 func init() {
 	exports := Foreign("Data.EuclideanRing")
 
-	exports["intDegree"] = func(x_ Any) Any {
-		x, _ := x_.(int)
-		return min(abs(x), maxInt)
+	exports["intDegree"] = func(x Any) Any {
+		return min(abs(x.(int)), maxInt)
 	}
 
 	// See the Euclidean definition in

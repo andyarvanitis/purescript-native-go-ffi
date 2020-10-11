@@ -7,10 +7,9 @@ import (
 func init() {
 	exports := Foreign("Record.Builder")
 
-	exports["copyRecord"] = func(rec_ Any) Any {
-		rec, _ := rec_.(Dict)
+	exports["copyRecord"] = func(rec Any) Any {
 		cpy := make(Dict)
-		for key, value := range rec {
+		for key, value := range rec.(Dict) {
 			cpy[key] = value
 		}
 		return cpy

@@ -20,9 +20,8 @@ func init() {
 		}
 	}
 
-	exports["char"] = func(s_ Any) Any {
-		s, _ := s_.(string)
-		if utf8.RuneCountInString(s) != 1 {
+	exports["char"] = func(s Any) Any {
+		if utf8.RuneCountInString(s.(string)) != 1 {
 			panic("Data.String.Unsafe.char: Expected string of length 1.")
 		}
 		return s

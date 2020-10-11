@@ -24,19 +24,17 @@ func max(a, b int) int {
 func init() {
 	exports := Foreign("Data.String.CodeUnits")
 
-	exports["fromCharArray"] = func(a_ Any) Any {
-		a, _ := a_.([]Any)
+	exports["fromCharArray"] = func(a Any) Any {
 		var buf strings.Builder
-		for _, c_ := range a {
+		for _, c_ := range a.([]Any) {
 			c, _ := c_.(string)
 			buf.WriteString(c)
 		}
 		return buf.String()
 	}
 
-	exports["toCharArray"] = func(s_ Any) Any {
-		s, _ := s_.(string)
-		strs := strings.Split(s, "")
+	exports["toCharArray"] = func(s Any) Any {
+		strs := strings.Split(s.(string), "")
 		result := make([]Any, 0, len(strs))
 		for _, str := range strs {
 			result = append(result, str)
@@ -66,25 +64,22 @@ func init() {
 
 	exports["_toChar"] = func(just Any) Any {
 		return func(nothing Any) Any {
-			return func(s_ Any) Any {
-				s, _ := s_.(string)
-				if utf8.RuneCountInString(s) == 1 {
-					return Apply(just, s_)
+			return func(s Any) Any {
+				if utf8.RuneCountInString(s.(string)) == 1 {
+					return Apply(just, s)
 				}
 				return nothing
 			}
 		}
 	}
 
-	exports["length"] = func(s_ Any) Any {
-		s, _ := s_.(string)
-		return utf8.RuneCountInString(s)
+	exports["length"] = func(s Any) Any {
+		return utf8.RuneCountInString(s.(string))
 	}
 
 	exports["countPrefix"] = func(p Any) Any {
-		return func(s_ Any) Any {
-			s, _ := s_.(string)
-			runes := []rune(s)
+		return func(s Any) Any {
+			runes := []rune(s.(string))
 			i := 0
 			for _, c := range runes {
 				b, _ := Apply(p, string(c)).(bool)

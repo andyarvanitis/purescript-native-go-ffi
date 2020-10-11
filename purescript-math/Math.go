@@ -8,34 +8,27 @@ import (
 func init() {
 	exports := Foreign("Math")
 
-	exports["abs"] = func(x_ Any) Any {
-		x, _ := x_.(float64)
-		return math.Abs(x)
+	exports["abs"] = func(x Any) Any {
+		return math.Abs(x.(float64))
 	}
 
-	exports["floor"] = func(x_ Any) Any {
-		x, _ := x_.(float64)
-		return math.Floor(x)
+	exports["floor"] = func(x Any) Any {
+		return math.Floor(x.(float64))
 	}
 
-	exports["pow"] = func(n_ Any) Any {
-		return func(p_ Any) Any {
-			n, _ := n_.(float64)
-			p, _ := p_.(float64)
-			return math.Pow(n, p)
+	exports["pow"] = func(n Any) Any {
+		return func(p Any) Any {
+			return math.Pow(n.(float64), p.(float64))
 		}
 	}
 
-	exports["remainder"] = func(n_ Any) Any {
-		return func(m_ Any) Any {
-			n, _ := n_.(float64)
-			m, _ := m_.(float64)
-			return math.Remainder(n, m)
+	exports["remainder"] = func(n Any) Any {
+		return func(m Any) Any {
+			return math.Remainder(n.(float64), m.(float64))
 		}
 	}
 
-	exports["round"] = func(x_ Any) Any {
-		x, _ := x_.(float64)
-		return math.Round(x)
+	exports["round"] = func(x Any) Any {
+		return math.Round(x.(float64))
 	}
 }

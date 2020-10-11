@@ -14,9 +14,8 @@ func init() {
 		return errors.New(msg.(string))
 	}
 
-	exports["message"] = func(e_ Any) Any {
-		e, _ := e_.(error)
-		return e.Error()
+	exports["message"] = func(e Any) Any {
+		return e.(error).Error()
 	}
 
 	exports["throwException"] = func(e Any) Any {

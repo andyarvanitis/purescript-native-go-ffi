@@ -8,15 +8,16 @@ import (
 func init() {
 	exports := Foreign("Data.Enum")
 
-	exports["toCharCode"] = func(c_ Any) Any {
-		c, _ := c_.(string)
-		r, _ := utf8.DecodeRuneInString(c)
+	exports["toCharCode"] = func(c Any) Any {
+		r, size := utf8.DecodeRuneInString(c.(string))
+		if size == 0 {
+			return 0
+		}
 		return int(r)
 	}
 
-	exports["fromCharCode"] = func(i_ Any) Any {
-		i, _ := i_.(int)
-		return string(rune(i))
+	exports["fromCharCode"] = func(i Any) Any {
+		return string(rune(i.(int)))
 	}
 
 }

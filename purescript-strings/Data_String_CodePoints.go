@@ -9,10 +9,9 @@ func init() {
 	exports := Foreign("Data.String.CodePoints")
 
 	exports["_unsafeCodePointAt0"] = func(_ Any) Any {
-		return func(str_ Any) Any {
-			str, _ := str_.(string)
-			r, _ := utf8.DecodeRuneInString(str)
-			if r == utf8.RuneError {
+		return func(str Any) Any {
+			r, size := utf8.DecodeRuneInString(str.(string))
+			if r == utf8.RuneError || size == 0 {
 				return Undefined
 			}
 			return int(r)
@@ -24,10 +23,9 @@ func init() {
 			return func(nothing Any) Any {
 				return func(unsafeCodePointAt0 Any) Any {
 					return func(index_ Any) Any {
-						return func(s_ Any) Any {
+						return func(s Any) Any {
 							index, _ := index_.(int)
-							s, _ := s_.(string)
-							runes := []rune(s)
+							runes := []rune(s.(string))
 							if index < 0 || index >= len(runes) {
 								return nothing
 							}
@@ -43,9 +41,8 @@ func init() {
 	exports["_countPrefix"] = func(_ Any) Any {
 		return func(unsafeCodePointAt0 Any) Any {
 			return func(pred Any) Any {
-				return func(s_ Any) Any {
-					s, _ := s_.(string)
-					runes := []rune(s)
+				return func(s Any) Any {
+					runes := []rune(s.(string))
 					i := 0
 					for _, r := range runes {
 						cp := Apply(unsafeCodePointAt0, string(r))
@@ -62,9 +59,8 @@ func init() {
 	}
 
 	exports["_singleton"] = func(_ Any) Any {
-		return func(c_ Any) Any {
-			c, _ := c_.(int)
-			return string(rune(c))
+		return func(c Any) Any {
+			return string(rune(c.(int)))
 		}
 	}
 
@@ -85,9 +81,8 @@ func init() {
 
 	exports["_toCodePointArray"] = func(_ Any) Any {
 		return func(unsafeCodePointAt0 Any) Any {
-			return func(s_ Any) Any {
-				s, _ := s_.(string)
-				runes := []rune(s)
+			return func(s Any) Any {
+				runes := []rune(s.(string))
 				result := make([]Any, 0, len(runes))
 				for _, r := range runes {
 					result = append(result, Apply(unsafeCodePointAt0, string(r)))

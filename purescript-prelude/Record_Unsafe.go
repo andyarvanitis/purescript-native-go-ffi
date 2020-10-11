@@ -13,16 +13,14 @@ func init() {
 		}
 	}
 
-	exports["unsafeSet"] = func(label_ Any) Any {
+	exports["unsafeSet"] = func(label Any) Any {
 		return func(value Any) Any {
-			return func(rec_ Any) Any {
-				label, _ := label_.(string)
-				rec, _ := rec_.(Dict)
+			return func(rec Any) Any {
 				copy := make(Dict)
-				for key, val := range rec {
+				for key, val := range rec.(Dict) {
 					copy[key] = val
 				}
-				copy[label] = value
+				copy[label.(string)] = value
 				return copy
 			}
 		}

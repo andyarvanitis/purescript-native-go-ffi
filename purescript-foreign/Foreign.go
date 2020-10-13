@@ -23,9 +23,6 @@ func init() {
 		case float64:
 			return "number"
 
-		case int:
-			return "number"
-
 		case bool:
 			return "boolean"
 
@@ -49,9 +46,6 @@ func init() {
 			return "String"
 
 		case float64:
-			return "Number"
-
-		case int:
 			return "Number"
 
 		case bool:

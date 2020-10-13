@@ -18,7 +18,7 @@ func init() {
 			return func(n_ Any) Any {
 				just := just_.(Fn)
 				n := n_.(float64)
-				if math.Round(n) == n {
+				if math.Trunc(n) == n {
 					return just(int(n))
 				} else {
 					return nothing

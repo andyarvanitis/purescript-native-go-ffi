@@ -18,6 +18,9 @@ func init() {
 		}
 		return math.NaN()
 	}
+
+	exports["nan"] = math.NaN()
+
 	exports["isNaN"] = func(x Any) Any {
 		return math.IsNaN(x.(float64))
 	}

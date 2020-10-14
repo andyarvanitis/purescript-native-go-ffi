@@ -12,6 +12,10 @@ func init() {
 		return math.Abs(x.(float64))
 	}
 
+	exports["ceil"] = func(x Any) Any {
+		return math.Ceil(x.(float64))
+	}
+
 	exports["floor"] = func(x Any) Any {
 		return math.Floor(x.(float64))
 	}

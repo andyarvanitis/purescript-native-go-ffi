@@ -4,4 +4,4 @@
 *.bak
 .vscode
 .DS_Store
-
+go.sum

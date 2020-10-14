@@ -1,9 +1,9 @@
 package purescript_integers
 
 import (
-	"fmt"
 	. "github.com/purescript-native/go-runtime"
 	"math"
+	"strconv"
 )
 
 func init() {
@@ -27,6 +27,34 @@ func init() {
 		}
 	}
 
+	exports["fromStringAsImpl"] = func(just_ Any) Any {
+		return func(nothing Any) Any {
+			return func(radix Any) Any {
+				return func(s Any) Any {
+					just := just_.(Fn)
+					i, err := strconv.ParseInt(s.(string), radix.(int), 32)
+					if err == nil {
+						return just(int(i))
+					} else {
+						return nothing
+					}
+				}
+			}
+		}
+	}
+
+	exports["quot"] = func(x Any) Any {
+		return func(y Any) Any {
+			return x.(int) / y.(int)
+		}
+	}
+
+	exports["rem"] = func(x Any) Any {
+		return func(y Any) Any {
+			return x.(int) % y.(int)
+		}
+	}
+
 	exports["pow"] = func(n_ Any) Any {
 		return func(p_ Any) Any {
 			n := n_.(int)
@@ -35,22 +63,9 @@ func init() {
 		}
 	}
 
-	exports["toStringAs"] = func(radix_ Any) Any {
-		return func(i_ Any) Any {
-			radix := radix_.(int)
-			i := i_.(int)
-			switch radix {
-			case 2:
-				return fmt.Sprintf("%b", i)
-			case 8:
-				return fmt.Sprintf("%o", i)
-			case 10:
-				return fmt.Sprintf("%d", i)
-			case 16:
-				return fmt.Sprintf("%x", i)
-			default:
-				panic(fmt.Sprintf("Unsupported radix (%d)", radix))
-			}
+	exports["toStringAs"] = func(radix Any) Any {
+		return func(i Any) Any {
+			return strconv.FormatInt(int64(i.(int)), radix.(int))
 		}
 	}
 

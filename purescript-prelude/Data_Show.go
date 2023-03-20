@@ -2,6 +2,7 @@ package purescript_prelude
 
 import (
 	"fmt"
+	"math"
 	"strings"
 
 	. "github.com/purescript-native/go-runtime"
@@ -15,8 +16,9 @@ func init() {
 	}
 
 	exports["showNumberImpl"] = func(n Any) Any {
-		s := fmt.Sprintf("%g", n.(float64))
-		if strings.Contains(s, ".") || strings.Contains(s, "e") {
+		f := n.(float64)
+		s := fmt.Sprintf("%g", f)
+		if strings.Contains(s, ".") || strings.Contains(s, "e") || math.IsNaN(f) {
 			return s
 		} else {
 			return s + ".0"
